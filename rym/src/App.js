@@ -8,13 +8,10 @@ export default class CharacterCard extends Component {
       state: this.props.state,
       chapters: this.props.chapters,
     };
-    this.kill = this.kill.bind( this )
-    /*  hay que pasarle a la función el concepto para
-  que el botón kill funcione*/
   }
-  kill() {
+  kill =(e) => {
     this.setState({ state: "Dead" });
-  }
+  } // al usar una arrow function se le pasa el contexto
   render() {
     return (
       <div className="card">
