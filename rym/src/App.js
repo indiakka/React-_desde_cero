@@ -9,9 +9,11 @@ export default class CharacterCard extends Component {
       chapters: this.props.chapters,
     };
   }
-  kill =(e) => {
-    this.setState({ state: "Dead" });
-  } // al usar una arrow function se le pasa el contexto
+  kill = ( e ) =>
+  {
+    console.log(e.target.value)
+    this.setState({ state: e.target.value });
+  } 
   render() {
     return (
       <div className="card">
@@ -19,8 +21,11 @@ export default class CharacterCard extends Component {
         <p>{this.state.state}</p>
         <p>{this.props.gender}</p>
         <p>{this.state.chapters}</p>
-        <button onClick={this.kill}>KILL</button>
+        <input onChange={this.kill} />
       </div>
+      /* al usar target.value del evento, con el 
+      input, creamos un cuadro de texto en el que 
+      al escribir cambiamos el estado */
     );
   }
 }
