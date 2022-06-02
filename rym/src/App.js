@@ -9,9 +9,9 @@ export default class CharacterCard extends Component {
       chapters: this.props.chapters,
     };
   }
-  kill = ( e ) =>
+  kill = ( param, e ) =>
   {
-    console.log(e.target.value)
+    console.log(e.target.value, param)
     this.setState({ state: e.target.value });
   } 
   render() {
@@ -21,7 +21,7 @@ export default class CharacterCard extends Component {
         <p>{this.state.state}</p>
         <p>{this.props.gender}</p>
         <p>{this.state.chapters}</p>
-        <input onChange={this.kill} />
+        <input onChange={this.kill.bind(this, "qwerty")} />
       </div>
       /* al usar target.value del evento, con el 
       input, creamos un cuadro de texto en el que 
