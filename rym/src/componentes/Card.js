@@ -1,13 +1,20 @@
 import React, { Component } from "react";
-import Title from "./Title";
-import {AiFillHeart ,AiOutlineQuestion} from 'react-icons/ai'
+import { AiFillHeart, AiOutlineQuestion } from "react-icons/ai";
 import { GiCoffin } from "react-icons/gi";
 import { FaMale, FaFemale } from "react-icons/fa";
+import {
+  Card,
+  CardImg,
+  CardText,
+  CardBody,
+  CardTitle,
+  CardSubtitle,
+  Button,
+} from "reactstrap";
 
 import "./Card.css";
 
-
-export default class Card extends Component {
+export default class ChCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -36,39 +43,37 @@ export default class Card extends Component {
     this.props.editCharacter(this.props.titulo);
   };
 
-  render ()
-  {
-    
+  render() {
     return (
-      <div className="card">
-        <button onClick={this.rmCharacter}>Eliminar</button>
-        <Title setApp={this.setApp} titulo={this.props.titulo} />
-        <p>
-          {this.state.state === "Alive" ? (
-            <AiFillHeart icon="heart" />
-          ) : this.state.state === "Dead" ? (
-            <GiCoffin icon="coffin" />
-          ) : (
-            <AiOutlineQuestion icon="question" />
-          )}
-        </p>
-        <p>
-          {this.props.gender === "Male" ? (
-            <FaMale icon="male" />
-          ) : this.props.gender === "Female" ? (
-            <FaFemale icon="female" />
-          ) : (
-            <AiOutlineQuestion icon="question" />
-          )}
-        </p>
-        <p>{this.state.chapters}</p>
-        <button onClick={this.editCharacter}>Editar</button>
-        <br />
-        <input onChange={this.kill.bind(this, "qwerty")} />
+      <div>
+        <Card>
+          <CardImg height="auto" width="50px" top src={this.props.img} />
+          <CardBody>
+            <CardTitle> {this.props.titulo} </CardTitle>
+
+            <CardSubtitle>
+              {this.state.state === "Alive" ? (
+                <AiFillHeart icon="heart" />
+              ) : this.state.state === "Dead" ? (
+                <GiCoffin icon="coffin" />
+              ) : (
+                <AiOutlineQuestion icon="question" />
+              )}
+            </CardSubtitle>
+            <CardSubtitle>
+              {this.props.gender === "Male" ? (
+                <FaMale icon="male" />
+              ) : this.props.gender === "Female" ? (
+                <FaFemale icon="female" />
+              ) : (
+                <AiOutlineQuestion icon="question" />
+              )}
+            </CardSubtitle>
+            <CardText> {this.state.chapters} </CardText>
+          </CardBody>
+          <Button onClick={this.rmCharacter}>Eliminar</Button>
+        </Card>
       </div>
-      /* al usar target.value del evento, con el 
-      input, creamos un cuadro de texto en el que 
-      al escribir cambiamos el estado */
     );
   }
 }

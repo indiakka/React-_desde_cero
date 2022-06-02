@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import characters from "../characters.json";
-import Form from './Form'
+import Form from "./Form";
 import Card from "./Card";
+import { Container, Row, Col } from "reactstrap";
 
 export default class Characters extends Component {
   constructor(props) {
@@ -72,18 +73,26 @@ a guardar, se guarde el nuevo personaje */
     return (
       <div>
         <Form addCharacter={this.addCharacter} name="Rick" />
-        <br />
-        {this.state.characters.map((ch, i) => (
-          <Card
-            rmCharacters={this.rmCharacter}
-            editCharacters={this.editCharacter}
-            key={i}
-            titulo={ch.name}
-            state={ch.status}
-            gender={ch.gender}
-            chapters={this.extractChapters(ch.episode)}
-          />
-        ))}
+        <Container>
+          <Row>
+            {" "}
+            {this.state.characters.map((ch, i) => 
+              <Col>
+                {" "}
+                <Card
+                  rmCharacters={this.rmCharacter}
+                  editCharacters={this.editCharacter}
+                  key={i}
+                  titulo={ch.name}
+                  state={ch.status}
+                  gender={ch.gender}
+                  img={ch.image}
+                  chapters={this.extractChapters(ch.episode)}
+                />
+              </Col>
+            )}{" "}
+          </Row>
+        </Container>
       </div>
     );
   }

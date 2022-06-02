@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-
-export default class Form extends Component {
+import { Form, Input, Button } from "reactstrap";
+export default class ChForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -31,33 +31,33 @@ export default class Form extends Component {
 
   render() {
     return (
-      <div>
-        <input
+      <Form>
+        <Input
           type="text"
           onChange={this.change.bind(this, "name")}
           placeholder="name"
           value={this.state.name}
         />
-        <input
+        <Input
           type="text"
           onChange={this.change.bind(this, "state")}
           placeholder="state"
           value={this.state.state}
         />
-        <input
+        <Input
           type="text"
           onChange={this.change.bind(this, "gender")}
           placeholder="gender"
           value={this.state.gender}
         />
-        <input
+        <Input
           type="number"
           onChange={this.change.bind(this, "chapters")}
           placeholder="chapters"
           value={this.state.chapters}
         />
-        <button onClick={this.saveCharacter}> Guardar</button>
-      </div>
+        <Button onClick={this.saveCharacter}> Guardar</Button>
+      </Form>
     );
   }
 }
