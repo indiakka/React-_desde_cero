@@ -1,13 +1,54 @@
 import React, { Component } from "react";
 import "./App.css";
+import characters from './characters.json'
 
-export default class CharacterCard extends Component {
+
+export default class Characters extends Component
+{
+  constructor ( props )
+  {
+    super( props );
+    this.state = {
+    characters: characters.results
+    };
+  }
+
+  extractChapters = ( chapters ) =>
+  {
+    let res = []
+    chapters.forEach( ch  => 
+      res.push( ch.split( "/" ).slice( -1 )[0] )
+    )/* añadimos esta función ya que en el .json los episodios
+    aparecen como una url, y para que  solo nos muestre solo los numeros
+    de los episodios en los que salen */
+    return res.join(",")
+}
+
+  render ()
+  {
+    return (
+      <div>
+        {this.state.characters.map((ch, i) => (
+          <CharacterCard
+            key={i}
+            titulo={ch.name}
+            state={ch.status}
+            gender={ch.gender}
+            chapters={this.extractChapters(ch.episode)}
+          />
+        ))}
+      </div>
+    );
+  }
+}
+
+export  class CharacterCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
       state: this.props.state,
       chapters: this.props.chapters,
-      app: "querty"
+      app: "querty",
     };
   }
 
@@ -23,7 +64,9 @@ export default class CharacterCard extends Component {
     console.log(e.target.value, param)
     this.setState({ state: e.target.value });
   } 
-  render() {
+  render ()
+  {
+    console.log(this.state.characters)
     return (
       <div className="card">
         {this.state.app}

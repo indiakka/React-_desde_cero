@@ -7,7 +7,7 @@ import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
-    <CharacterCard titulo="Morty" state="Alive" gender="male" chapters="all" />
+    <CharacterCard  />
   </React.StrictMode>,
   document.getElementById("root")
 );
