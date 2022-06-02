@@ -2,12 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 
-import CharacterCard from "./App";
+import Characters from "./componentes/Characters";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
-    <CharacterCard  />
+    <Characters  />
   </React.StrictMode>,
   document.getElementById("root")
 );

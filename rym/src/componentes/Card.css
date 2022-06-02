@@ -1,11 +1,6 @@
-h1 {
-  text-align: center;
-  color: green;
-}
-
 .card {
   border: 2px solid black;
-  width: 250px;
+  width: 1000px;
   height: 350px;
   text-align: center;
 }
