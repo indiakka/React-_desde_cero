@@ -7,8 +7,17 @@ export default class CharacterCard extends Component {
     this.state = {
       state: this.props.state,
       chapters: this.props.chapters,
+      app: "querty"
     };
   }
+
+  setApp = ( param ) =>
+  {
+    this.setState( {
+      app: param
+    })
+  }
+
   kill = ( param, e ) =>
   {
     console.log(e.target.value, param)
@@ -17,7 +26,8 @@ export default class CharacterCard extends Component {
   render() {
     return (
       <div className="card">
-        <App titulo={this.props.titulo} />
+        {this.state.app}
+        <App setApp={this.setApp} titulo={this.props.titulo} />
         <p>{this.state.state}</p>
         <p>{this.props.gender}</p>
         <p>{this.state.chapters}</p>
@@ -30,7 +40,13 @@ export default class CharacterCard extends Component {
   }
 }
 
-export class App extends Component {
+export class App extends Component
+{
+  componentDidMount ()
+  {
+    this.props.setApp( "ytrewq" )
+    // cambiamos el estado al padre
+  }
   render() {
     // nos devuelve algo
     return (
