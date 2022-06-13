@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Form, Input, Button } from "reactstrap";
+
+import "./Form.css";
 export default class ChForm extends Component {
   constructor(props) {
     super(props);
@@ -32,6 +34,7 @@ export default class ChForm extends Component {
   render() {
     return (
       <Form>
+        <br />
         <Input
           type="text"
           onChange={this.change.bind(this, "name")}
@@ -56,8 +59,10 @@ export default class ChForm extends Component {
           placeholder="chapters"
           value={this.state.chapters}
         />
+        <br />
         <Button onClick={this.saveCharacter}> Guardar</Button>
       </Form>
+       
     );
   }
 }

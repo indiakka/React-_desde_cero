@@ -1,16 +1,21 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
+import { Routes, BrowserRouter, Route } from "react-router-dom";
 
+import ChForm from "./componentes/Form";
 import Characters from "./componentes/Characters";
 import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.css";
- 
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <Characters  />
-  </React.StrictMode>
+  <BrowserRouter>
+    <Routes>
+      <Route path="/form" element={<ChForm />} />
+      <Route path="/index" element={<Characters />} />
+    </Routes>
+  </BrowserRouter>
 );
 
 // If you want to start measuring performance in your app, pass a function

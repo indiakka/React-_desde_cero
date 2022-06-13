@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import characters from "../characters.json";
-import Form from "./Form";
 import Card from "./Card";
-import { Container, Row, Col } from "reactstrap";
+import { Container, Row, Col, Input } from "reactstrap";
 
 export default class Characters extends Component {
   constructor(props) {
     super(props);
     this.state = {
       characters: characters.results,
+      filter_name: "",
     };
   }
 
@@ -69,28 +69,48 @@ a guardar, se guarde el nuevo personaje */
     }
   };
 
+  filterCharacters = ( e ) =>
+  {
+    let value= ""
+    if ( e.target.value.length >= 3) {
+      value = e.target.value 
+    }
+    this.setState({ filter_name: value });
+  };
+
   render() {
     return (
       <div>
-        <Form addCharacter={this.addCharacter} name="Rick" />
+        <br />
+    
+        <Input
+          onChange={this.filterCharacters}
+          placeholder="Filtrar personaje por nombre"
+        />
+        <br />
         <Container>
           <Row>
-            {" "}
-            {this.state.characters.map((ch, i) => 
-              <Col>
-                {" "}
-                <Card
-                  rmCharacters={this.rmCharacter}
-                  editCharacters={this.editCharacter}
-                  key={i}
-                  titulo={ch.name}
-                  state={ch.status}
-                  gender={ch.gender}
-                  img={ch.image}
-                  chapters={this.extractChapters(ch.episode)}
-                />
-              </Col>
-            )}{" "}
+            {this.state.characters.map((ch, i) => {
+              if (ch.name.includes(this.state.filter_name)) {
+                return (
+                  <Col>
+                    <Card
+                      key={i}
+                      rmCharacters={this.rmCharacter}
+                      editCharacters={this.editCharacter}
+                      
+                      titulo={ch.name}
+                      state={ch.status}
+                      gender={ch.gender}
+                      img={ch.image}
+                      chapters={this.extractChapters(ch.episode)}
+                    />
+                  </Col>
+                );
+              } else {
+                return false;
+              }
+            })}
           </Row>
         </Container>
       </div>

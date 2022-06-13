@@ -46,6 +46,7 @@ export default class ChCard extends Component {
   render() {
     return (
       <div>
+        <br/>
         <Card>
           <CardImg height="auto" width="50px" top src={this.props.img} />
           <CardBody>
