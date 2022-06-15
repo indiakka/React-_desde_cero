@@ -1,15 +1,38 @@
-import React from "react";
+import React, { Component } from "react";
 import { Link, useParams } from "react-router-dom";
+import characters from "../characters.json";
 
-export default function Char ()
-{
-      
-    const { id } = useParams();
-      return (
-        
+import Card from "./Card"
+export default class Char extends Component {
+  state = {
+    character: null,
+  };
+  componentDidMount() {
+    let id = this.props.find.params.id;
+    characters.results.forEach((c) => {
+      if (c.name === id) {
+        this.setState({ character: c });
+      }
+    });
+  }
+  render() {
+    if (!this.state.character) {
+      return <div></div>;
+    }
+    
+    let ch= this.state.character
+
+    return (
       <div>
-        <h1>{id}</h1>
+        <h1>{ch.name}</h1>
+        <Card
+          titulo={ch.name}
+          state={ch.status}
+          gender={ch.gender}
+          img={ch.image}
+        />
         <Link to="/index">Volver</Link>
       </div>
     );
   }
+}
