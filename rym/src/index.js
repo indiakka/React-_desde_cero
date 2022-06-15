@@ -1,28 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import { Routes, BrowserRouter, Route, NavLink } from "react-router-dom";
+import { Routes, BrowserRouter, Route} from "react-router-dom";
 
 import Characters from "./componentes/Characters";
 import Char from "./componentes/Char";
 import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.css";
 import Error404 from "./componentes/Error404";
+import {Heading, Foot} from "./componentes/Common";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
-    <ul className="menu">
-      <li>
-        {" "}
-        <NavLink to="/form">Formulario</NavLink>
-      </li>
-      <li>
-        {" "}
-        <NavLink to="/index">Personajes</NavLink>
-      </li>
-    </ul>
-
+    <Heading />
     <Routes>
       <Route path="/index" element={<Characters />} />
       <Route path="/" element={<Characters />} />
