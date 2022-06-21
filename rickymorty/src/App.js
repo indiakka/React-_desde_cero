@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap";
 import React, { useState, useEffect } from "react";
-import "./App.css";
+import "./App.scss";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Search from "./components/Search/Search";
