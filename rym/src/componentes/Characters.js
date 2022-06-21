@@ -93,7 +93,7 @@ a guardar, se guarde el nuevo personaje */
             {this.state.characters.map((ch, i) => {
               if (ch.name.includes(this.state.filter_name)) {
                 return (
-                  <Col>
+                  <Col key={i}>
                     <Link to={"/personaje/" + ch.name}>
                       <Card
                         key={i}
@@ -109,7 +109,7 @@ a guardar, se guarde el nuevo personaje */
                   </Col>
                 );
               } else {
-                return false;
+                return <div></div>;
               }
             })}
           </Row>

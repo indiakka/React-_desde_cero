@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { NavLink, withRouter } from "react-router-dom";
 
+
 export class Heading extends Component {
   render() {
     return (
@@ -20,7 +21,10 @@ export class Heading extends Component {
     );
   }
 }
+/*
+
 class MyFoot extends Component {
+  
   render() {
     if ( this.props.location.pathname === "/personaje/añadir" )
     {
@@ -28,10 +32,11 @@ class MyFoot extends Component {
     }
       return (
         <div className="foot">
-          <a href="">Condiciones de uso</a>
-          <a href="">Terminos legales</a>
+          <a href="/">Condiciones de uso</a>
+          <a href="/">Terminos legales</a>
         </div>
       );
   }
 }
 export const Foot = withRouter(MyFoot);
+*/
