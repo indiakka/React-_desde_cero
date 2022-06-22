@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { Link, useParams } from "react-router-dom";
-import characters from "../characters.json";
+import { Link } from "react-router-dom";
 
 import Card from "./Card"
 export default class Char extends Component {
@@ -9,6 +8,7 @@ export default class Char extends Component {
   };
   componentDidMount() {
     let id = this.props.find.params.id;
+    let characters = []
     characters.results.forEach((c) => {
       if (c.name === id) {
         this.setState({ character: c });

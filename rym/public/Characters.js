@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import characters from "../characters.json";
 import Card from "./Card";
 import { Container, Row, Col, Input } from "reactstrap";
 import { Link } from "react-router-dom";
@@ -7,17 +8,9 @@ export default class Characters extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      characters: [],
+      characters: characters.results,
       filter_name: "",
     };
-  }
-
-  componentDidMount() {
-    fetch("characters.json")
-      .then((r) => r.json())
-      .then((d) => {
-        this.setState({ characters: d.results });
-      });
   }
 
   extractChapters = (chapters) => {
