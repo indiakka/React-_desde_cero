@@ -95,6 +95,7 @@ a guardar, se guarde el nuevo personaje */
           placeholder="Filtrar personaje por nombre"
         />
         <br />
+        {this.state.characters.length === 0 && <div>Cargando...</div>}
         <Container>
           <Row>
             {this.state.characters.map((ch, i) => {
