@@ -9,16 +9,11 @@ export default class Char extends Component {
   componentDidMount() {
     let id = this.props.find.params.id;
 
-    fetch("/characters.json")
+    fetch("https://rickandmortyapi.com/api/character/" + id)
       .then((r) => r.json())
       .then((d) => {
-        d.results.forEach((c) => {
-          if (c.name === id) {
-            this.setState({ character: c });
-          }
-        });
+        this.setState({ character: d});
       });
-    
   }
   render() {
     if (!this.state.character) {

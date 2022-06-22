@@ -13,7 +13,7 @@ export default class Characters extends Component {
   }
 
   componentDidMount() {
-    fetch("/characters.json")
+    fetch("https://rickandmortyapi.com/api/character/")
       .then((r) => r.json())
       .then((d) => {
         this.setState({ characters: d.results });
@@ -101,7 +101,7 @@ a guardar, se guarde el nuevo personaje */
               if (ch.name.includes(this.state.filter_name)) {
                 return (
                   <Col key={i}>
-                    <Link to={"/personaje/" + ch.name}>
+                    <Link to={"/personaje/" + ch.id}>
                       <Card
                         key={i}
                         rmCharacters={this.rmCharacter}
