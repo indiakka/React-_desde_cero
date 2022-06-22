@@ -13,7 +13,7 @@ export default class Characters extends Component {
   }
 
   componentDidMount() {
-    fetch("characters.json")
+    fetch("/characters.json")
       .then((r) => r.json())
       .then((d) => {
         this.setState({ characters: d.results });

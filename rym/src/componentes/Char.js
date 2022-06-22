@@ -1,26 +1,31 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-import Card from "./Card"
+import Card from "./Card";
 export default class Char extends Component {
   state = {
     character: null,
   };
   componentDidMount() {
     let id = this.props.find.params.id;
-    let characters = []
-    characters.results.forEach((c) => {
-      if (c.name === id) {
-        this.setState({ character: c });
-      }
-    });
+
+    fetch("/characters.json")
+      .then((r) => r.json())
+      .then((d) => {
+        d.results.forEach((c) => {
+          if (c.name === id) {
+            this.setState({ character: c });
+          }
+        });
+      });
+    
   }
   render() {
     if (!this.state.character) {
       return <div></div>;
     }
-    
-    let ch= this.state.character
+
+    let ch = this.state.character;
 
     return (
       <div>
