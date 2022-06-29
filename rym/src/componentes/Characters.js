@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Card from "./Card";
 import { Container, Row, Col, Input } from "reactstrap";
 import { Link } from "react-router-dom";
-
+import { store, actions } from "./store";
 export default class Characters extends Component {
   constructor(props) {
     super(props);
@@ -17,7 +17,15 @@ export default class Characters extends Component {
       .then((r) => r.json())
       .then((d) => {
         this.setState({ characters: d.results });
+        store.dispatch(actions.setChar(d.results));
       });
+    this.unsub = store.subscribe(() => {
+      this.setState({ characters: store.getState().characters });
+    });
+  }
+  componentWillUnmount()
+  {
+    this.unsub()
   }
 
   extractChapters = (chapters) => {
