@@ -3,6 +3,8 @@ import Card from "./Card";
 import { Container, Row, Col, Input } from "reactstrap";
 import { Link } from "react-router-dom";
 import { store, actions } from "./store";
+import { connect } from "react-redux";
+
 export default class Characters extends Component {
   constructor(props) {
     super(props);
@@ -15,18 +17,16 @@ export default class Characters extends Component {
   componentDidMount() {
     fetch("https://rickandmortyapi.com/api/character/")
       .then((r) => r.json())
-      .then((d) => {
+      .then( ( d ) =>
+      {
+        this.props.set(d.results)
         this.setState({ characters: d.results });
-        store.dispatch(actions.setChar(d.results));
       });
     this.unsub = store.subscribe(() => {
       this.setState({ characters: store.getState().characters });
     });
   }
-  componentWillUnmount()
-  {
-    this.unsub()
-  }
+  
 
   extractChapters = (chapters) => {
     let res = [];
@@ -103,10 +103,10 @@ a guardar, se guarde el nuevo personaje */
           placeholder="Filtrar personaje por nombre"
         />
         <br />
-        {this.state.characters.length === 0 && <div>Cargando...</div>}
+        {this.props.characters.length === 0 && <div>Cargando...</div>}
         <Container>
           <Row>
-            {this.state.characters.map((ch, i) => {
+            {this.props.characters.map((ch, i) => {
               if (ch.name.includes(this.state.filter_name)) {
                 return (
                   <Col key={i}>
@@ -134,3 +134,12 @@ a guardar, se guarde el nuevo personaje */
     );
   }
 }
+
+const mapState = ( state ) =>
+{
+  return {characters: state.characters}
+}
+
+const mapActions = {set: actions.setChar}
+
+const characters= connect(mapState, mapActions)(Characters)

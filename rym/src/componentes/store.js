@@ -7,7 +7,7 @@ const initialState = {
 };
 
 //Acciones
-
+//para añadir personajes desde consola
 export const actions = {
   addChar: (name, state, gender, chapters) => {
     return {
