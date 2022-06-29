@@ -1,58 +1,81 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import { Routes, BrowserRouter, Route} from "react-router-dom";
+import { Routes, BrowserRouter, Route } from "react-router-dom";
 
 import Characters from "./componentes/Characters";
 import Char from "./componentes/Char";
-import ChForm from "./componentes/Form"
+import ChForm from "./componentes/Form";
 import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.css";
 import Error404 from "./componentes/Error404";
-import {Heading, Foot} from "./componentes/Common";
+import { Heading, Foot } from "./componentes/Common";
 
 //Redux
-import {createStore} from 'redux'
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 
 const initialState = {
-  Characters: []
-}
+  Characters: [],
+};
 
 //Acciones
-function addChar (name, state, gender, chapters){
+function addChar(name, state, gender, chapters) {
   return {
     type: "ADD_CHAR",
     payload: {
       name: name,
       state: state,
       gender: gender,
-      chapters: chapters
-    }
-  }
+      chapters: chapters,
+    },
+  };
 }
+//incremento y decremento
+function incr() {
+  return { type: "INCR" };
+}
+
+function decr() {
+  return { type: "DECR" };
+}
+
 //Reducers
- 
-function appReducer ( state = {}, action )
-{
-  switch ( action.type )
-  {
+
+function charReducer(state = {}, action) {
+  switch (action.type) {
     case "ADD_CHAR": {
-      let newst = { ...state }
-      let ch ={ ...action.payload, id: newst.characters.length +1}
-      newst.characters.push( ch )
-      return newst
+      let newst = { ...state };
+      let ch = { ...action.payload, id: newst.length + 1 };
+      newst.push(ch);
+      return newst;
     }
-      default: return state
+    default:
+      return state;
   }
 }
+
+function counterReducer(state = 0, action) {
+  switch (action.type) {
+    case "INCR": 
+      return state + 1
+    case "DECR": 
+      return  state - 1
+    default:
+      return state;
+  }
+}
+
+const appReducer = combineReducers({characters: charReducer, counter: counterReducer})
 
 //Store
 
-const store = createStore(appReducer, initialState)
-window.store = store
+const store = configureStore({ reducer: { appReducer, initialState } });
+window.store = store;
+window.addChar = addChar;
+window.incr = incr;
+window.decr = decr;
 
 //End Redux
-
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
