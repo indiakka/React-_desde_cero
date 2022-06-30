@@ -7,7 +7,7 @@ import Characters from "./componentes/Characters";
 import Char from "./componentes/Char";
 import ChForm from "./componentes/Form";
 import reportWebVitals from "./reportWebVitals";
-import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import Error404 from "./componentes/Error404";
 import { Heading, Foot } from "./componentes/Common";
 import { Provider } from "react-redux";
@@ -16,17 +16,22 @@ import { store } from "./componentes/store";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
-    <Heading />
+    
     <Provider store={store}>
-    <Routes>
+      <Heading />
+      <Routes>
+        
       <Route path="/index" element={<Characters />} />
       <Route path="/" element={<Characters />} />
       <Route path="/personajes" element={<Characters />} />
       <Route path="/personaje/:id" element={<Char />} />
       <Route path="/personaje/añadir" element={<ChForm />} />
-      <Route element={<Error404 />} />
+        <Route element={<Error404 />} />
+        
       </Routes>
+      < Foot />
     </Provider>
+    
   </BrowserRouter>
 );
 

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { NavLink, withRouter } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 
 export class Heading extends Component {
@@ -21,7 +21,7 @@ export class Heading extends Component {
     );
   }
 }
-/*
+
 
 class MyFoot extends Component {
   
@@ -38,5 +38,4 @@ class MyFoot extends Component {
       );
   }
 }
-export const Foot = withRouter(MyFoot);
-*/
+export const Foot = (MyFoot);

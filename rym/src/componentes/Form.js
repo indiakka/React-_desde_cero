@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import { Form, Input, Button } from "reactstrap";
 
 import "./Form.css";
-export default class ChForm extends Component {
+import { connect } from "react-redux";
+import { actions } from "./store";
+export class ChForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -28,7 +30,8 @@ export default class ChForm extends Component {
       gender: this.state.gender,
       episode: this.state.chapters,
     };
-    this.props.addCharacter(character);
+    this.props.add( character );
+    this.props.history.push("/index")
   };
 
   render() {
@@ -66,3 +69,8 @@ export default class ChForm extends Component {
     );
   }
 }
+
+
+const form = connect( null, {add: actions.addChar })(ChForm)
+
+export default form

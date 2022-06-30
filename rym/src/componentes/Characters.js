@@ -15,18 +15,18 @@ export default class Characters extends Component {
   }
 
   componentDidMount() {
-    fetch("https://rickandmortyapi.com/api/character/")
-      .then((r) => r.json())
-      .then( ( d ) =>
-      {
-        this.props.set(d.results)
-        this.setState({ characters: d.results });
+    if (this.props.characters.length === 0) {
+      fetch("https://rickandmortyapi.com/api/character/")
+        .then((r) => r.json())
+        .then((d) => {
+          this.props.set(d.results);
+          this.setState({ characters: d.results });
+        });
+      this.unsub = store.subscribe(() => {
+        this.setState({ characters: store.getState().characters });
       });
-    this.unsub = store.subscribe(() => {
-      this.setState({ characters: store.getState().characters });
-    });
+    }
   }
-  
 
   extractChapters = (chapters) => {
     let res = [];
@@ -135,11 +135,10 @@ a guardar, se guarde el nuevo personaje */
   }
 }
 
-const mapState = ( state ) =>
-{
-  return {characters: state.characters}
-}
+const mapState = (state) => {
+  return { characters: state.characters };
+};
 
-const mapActions = {set: actions.setChar}
+const mapActions = { set: actions.setChar };
 
-const characters= connect(mapState, mapActions)(Characters)
+const characters = connect(mapState, mapActions)(Characters);
