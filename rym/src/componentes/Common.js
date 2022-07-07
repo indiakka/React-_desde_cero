@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 
 export class Heading extends Component {
@@ -23,19 +23,18 @@ export class Heading extends Component {
 }
 
 
-class MyFoot extends Component {
+export class MyFoot extends Component {
   
   render() {
-    if ( this.props.location.pathname === "/personaje/añadir" )
-    {
-      return <div></div>
+    if (useLocation.pathname === "/personaje/añadir") {
+      return <div></div>;
     }
-      return (
-        <div className="foot">
-          <a href="/">Condiciones de uso</a>
-          <a href="/">Terminos legales</a>
-        </div>
-      );
+    return (
+      <div className="foot">
+        <a href="/">Condiciones de uso</a>
+        <a href="/">Términos legales</a>
+      </div>
+    );
   }
 }
-export const Foot = (MyFoot);
+ 

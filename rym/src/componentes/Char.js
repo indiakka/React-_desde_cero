@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import Card from "./Card";
 export class Char extends Component {
@@ -10,25 +10,21 @@ export class Char extends Component {
   };
 
   componentDidMount() {
-  let id = parseInt (this.props.find.params.id, 10);
-    if ( this.props.characters.length === 0)
-    {
-      return 
+    let id = parseInt(useParams.id, 10);
+    if (this.props.characters.length === 0) {
+      return;
     }
-    if ( !this.state.character || this.state.character.id !== id )
-    {
-      let chars = this.props.characters.filter( ch => ch.id === id )
-    this.setState({character: chars[0]})}  }
+    if (!this.state.character || this.state.character.id !== id) {
+      let chars = this.props.characters.filter((ch) => ch.id === id);
+      this.setState({ character: chars[0] });
+    }
+  }
 
   componentDidUpdate() {
     this.update();
   }
 
-  update() {
-  
-
-   
-  }
+  update() {}
   render() {
     if (!this.state.character) {
       return (
@@ -64,11 +60,10 @@ export class Char extends Component {
   }
 }
 
-const mapState = ( state ) =>
-{
-  return {characters : state.characters}
-}
+const mapState = (state) => {
+  return { characters: state.characters };
+};
 
-const charcomp = connect( mapState, null )( Char );
+const charcomp = connect(mapState, null)(Char);
 
-export class charcomp;
+export default charcomp;

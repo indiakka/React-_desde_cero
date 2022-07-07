@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import Card from "./Card";
 import { Container, Row, Col, Input } from "reactstrap";
 import { Link } from "react-router-dom";
-import { store, actions } from "./store";
+import {  actions} from "./store";
 import { connect } from "react-redux";
 
-export default class Characters extends Component {
+export  class Characters extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -15,16 +15,16 @@ export default class Characters extends Component {
   }
 
   componentDidMount() {
-    if (this.props.characters.length === 0) {
-      fetch("https://rickandmortyapi.com/api/character/")
-        .then((r) => r.json())
-        .then((d) => {
-          this.props.set(d.results);
-          this.setState({ characters: d.results });
-        });
-      this.unsub = store.subscribe(() => {
-        this.setState({ characters: store.getState().characters });
-      });
+    if ( this.props.characters.length === 0 )
+    {
+      setTimeout(()=> {
+        fetch( "https://rickandmortyapi.com/api/character/" )
+          .then( ( r ) => r.json() )
+          .then( ( d ) =>
+          {
+            this.props.set( d.results )
+          });
+        },3000);
     }
   }
 
@@ -38,33 +38,7 @@ export default class Characters extends Component {
     return res.join(",");
   };
 
-  addCharacter = (character) => {
-    this.setState({ characters: [...this.state.characters, character] });
-  }; /* se crea la función para que en el formulario al darle
-a guardar, se guarde el nuevo personaje */
-
   rmCharacter = (name) => {
-    let copy = [...this.state.characters]; /* creamos una copia, ya que no se
-     puede modificar el original */
-    let index = -1; // en caso de que no encuentre nada, que nos lo diga
-    copy.forEach((ch, i) => {
-      if (ch.name === name) {
-        // cuando el nombre pasado se encuentre
-        index = i; // hacemos que se guarde el indice
-      }
-    });
-    if (index !== -1) {
-      //cuando encuentre el indice
-      copy.splice(
-        index,
-        1
-      ); /* desde la copia con el indice nos borrara un elemento */
-      this.setState({ characters: copy }); /* y una vez borrado nos haga
-    una copia */
-    }
-  };
-
-  editCharacter = (name) => {
     let copy = [...this.state.characters]; /* creamos una copia, ya que no se
      puede modificar el original */
     let index = -1; // en caso de que no encuentre nada, que nos lo diga
@@ -103,7 +77,9 @@ a guardar, se guarde el nuevo personaje */
           placeholder="Filtrar personaje por nombre"
         />
         <br />
-        {this.props.characters.length === 0 && <div>Cargando...</div>}
+        {this.props.characters.length === 0 && 
+          <div className="loading">Cargando...</div>
+        }
         <Container>
           <Row>
             {this.props.characters.map((ch, i) => {
@@ -142,3 +118,5 @@ const mapState = (state) => {
 const mapActions = { set: actions.setChar };
 
 const characters = connect(mapState, mapActions)(Characters);
+
+export default characters
